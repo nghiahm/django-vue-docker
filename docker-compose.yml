@@ -6,7 +6,7 @@ services:
     build: ./backend
     # command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/opt/src/app/backend/
+      - ./backend:/opt/src/app/backend/
     ports:
       - 8000:8000
     depends_on:
