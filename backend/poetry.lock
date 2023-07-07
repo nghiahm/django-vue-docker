@@ -30,6 +30,20 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "gunicorn"
+version = "20.1.0"
+description = "WSGI HTTP Server for UNIX"
+category = "main"
+optional = false
+python-versions = ">=3.5"
+
+[package.extras]
+eventlet = ["eventlet (>=0.24.1)"]
+gevent = ["gevent (>=1.4.0)"]
+setproctitle = ["setproctitle"]
+tornado = ["tornado (>=0.2)"]
+
+[[package]]
 name = "sqlparse"
 version = "0.4.4"
 description = "A non-validating SQL parser."
@@ -60,12 +74,13 @@ python-versions = ">=2"
 
 [metadata]
 lock-version = "1.1"
-python-versions = "^3.10"
-content-hash = "95803fe6495564fda957f040f92d70647749ec54203f59be993ca0a5fd65f138"
+python-versions = "^3.9.6"
+content-hash = "b728e59aad1d5fa11a115e19d861a70a193385af598d0a888214b0772bbccea9"
 
 [metadata.files]
 asgiref = []
 django = []
+gunicorn = []
 sqlparse = []
 typing-extensions = []
 tzdata = []
