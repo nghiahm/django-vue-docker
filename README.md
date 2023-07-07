@@ -1,9 +1,8 @@
 # Django-VueJS
 
-## link
+## psql command
 ```bash
 https://www.postgresqltutorial.com/postgresql-administration/psql-commands/
-https://github.com/ju-c/docker-django-drf-vue-nginx
 ```
 
 ## 1. Database connection (PostgreSQL)
