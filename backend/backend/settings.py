@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import dotenv_values
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = dotenv_values(Path.joinpath(BASE_DIR, '.envs', '.backend'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +28,7 @@ SECRET_KEY = 'django-insecure-aeplnv54q+zmieio@c(h7f@k*o)_t$l&sq^z*y0ahicz#1tqwo
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = env['DJANGO_ALLOWED_HOSTS'].split(' ')
 
 
 # Application definition
@@ -73,10 +76,21 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': env['DB_ENGINE'],
+        'NAME': env['DB_NAME'],
+        'USER': env['DB_USER'],
+        'PASSWORD': env['DB_PASSWORD'],
+        'HOST': env['DB_HOST'],       
+        'PORT': env['DB_PORT'],  
     }
 }
 

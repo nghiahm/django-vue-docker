@@ -4,8 +4,16 @@ services:
   backend:
     container_name: ${PROJECT_NAME}-backend
     build: ./backend
-    command: sh -c "python manage.py collectstatic &&
+    command: sh -c "python manage.py makemigrations &&
+                    python manage.py migrate &&
+                    DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME} \
+                    DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL} \
+                    DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD} \
+                    python manage.py createsuperuser --noinput &&
+                    python manage.py collectstatic &&
                     gunicorn backend.wsgi:application --bind 0.0.0.0:8000"
+    depends_on:
+      - postgres
     volumes:
       - ./backend:/usr/src/backend
       - static:/usr/src/backend/static
@@ -28,13 +36,25 @@ services:
       - 80:80
     networks:
       - main
-
+  
+  postgres:
+    container_name: ${PROJECT_NAME}-postgres
+    image: postgres:14.0-alpine
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - main
 
 networks:
   main:
     driver: bridge
 
 volumes:
-  # postgres_data: {}
+  postgres_data: {}
   static: {}
   media: {}
