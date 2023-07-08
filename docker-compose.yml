@@ -10,14 +10,14 @@ services:
                     DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL} \
                     DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD} \
                     python manage.py createsuperuser --noinput &&
-                    python manage.py collectstatic &&
+                    python manage.py collectstatic --noinput &&
                     gunicorn backend.wsgi:application --bind 0.0.0.0:8000"
     depends_on:
       - postgres
     volumes:
       - ./backend:/usr/src/backend
-      - ./backend/static:/usr/src/backend/static
-      - ./backend/media:/usr/src/backend/media
+      # - ./backend/static:/usr/src/backend/static
+      # - ./backend/media:/usr/src/backend/media
     ports:
       - 8000:8000
     networks:
@@ -50,6 +50,21 @@ services:
     networks:
       - main
 
+  frontend:
+    container_name: ${PROJECT_NAME}-frontend
+    build: ./frontend
+    depends_on:
+      - backend
+      - postgres
+    volumes:
+      - ./frontend/:/usr/src/frontend
+      # - ./frontend/node_modules:/usr/src/frontend/node_modules
+      - /usr/src/frontend/node_modules
+    ports:
+      - 5173:5173
+    networks:
+      - main
+      
 networks:
   main:
     driver: bridge
