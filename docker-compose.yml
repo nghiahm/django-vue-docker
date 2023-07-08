@@ -16,8 +16,8 @@ services:
       - postgres
     volumes:
       - ./backend:/usr/src/backend
-      - static:/usr/src/backend/static
-      - media:/usr/src/backend/media
+      - ./backend/static:/usr/src/backend/static
+      - ./backend/media:/usr/src/backend/media
     ports:
       - 8000:8000
     networks:
