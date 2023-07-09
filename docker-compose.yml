@@ -4,20 +4,12 @@ services:
   backend:
     container_name: ${PROJECT_NAME}-backend
     build: ./backend
-    command: sh -c "python manage.py makemigrations &&
-                    python manage.py migrate &&
-                    DJANGO_SUPERUSER_USERNAME=${DJANGO_SUPERUSER_USERNAME} \
-                    DJANGO_SUPERUSER_EMAIL=${DJANGO_SUPERUSER_EMAIL} \
-                    DJANGO_SUPERUSER_PASSWORD=${DJANGO_SUPERUSER_PASSWORD} \
-                    python manage.py createsuperuser --noinput &&
-                    python manage.py collectstatic --noinput &&
-                    gunicorn backend.wsgi:application --bind 0.0.0.0:8000"
     depends_on:
       - postgres
     volumes:
-      - ./backend:/usr/src/backend
-      # - ./backend/static:/usr/src/backend/static
-      # - ./backend/media:/usr/src/backend/media
+      - ./backend:/usr/src/backend   
+      - static:/usr/src/backend/static
+      - media:/usr/src/backend/media
     ports:
       - 8000:8000
     networks:
