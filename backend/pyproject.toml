@@ -10,6 +10,10 @@ Django = "^4.2.3"
 gunicorn = "^20.1.0"
 poetry-dotenv-plugin = "^0.1.0"
 psycopg2-binary = "^2.9.6"
+djangorestframework = "^3.14.0"
+markdown = "^3.4.3"
+django-filter = "^23.2"
+django-cors-headers = "^4.1.0"
 
 [tool.poetry.dev-dependencies]
 

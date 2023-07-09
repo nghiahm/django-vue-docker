@@ -11,7 +11,6 @@ remove:
 	docker system prune -a
 
 up:
-	@make cp-env
 	docker compose up
 
 cp-env:
@@ -23,3 +22,12 @@ migrate:
 
 migrations:
 	docker compose run --rm backend python manage.py makemigrations
+
+collect-static:
+	docker compose run --rm backend python manage.py collectstatic
+
+create-admin:
+	docker compose run --rm backend python manage.py createsuperuser
+
+flush:
+	docker compose run --rm backend python manage.py flush --no-input
