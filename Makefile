@@ -6,6 +6,9 @@ destroy:
 rebuild:
 	docker compose build --no-cache
 
+build:
+	docker compose build
+
 remove:
 	@make destroy
 	docker system prune -a
