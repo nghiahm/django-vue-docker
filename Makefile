@@ -26,10 +26,10 @@ migrate:
 migrations:
 	docker compose run --rm backend python manage.py makemigrations
 
-collect-static:
+collectstatic:
 	docker compose run --rm backend python manage.py collectstatic
 
-create-admin:
+createsuperuser:
 	docker compose run --rm backend python manage.py createsuperuser
 
 flush:
