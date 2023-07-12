@@ -34,7 +34,7 @@
     </div>
   </div>
 </template>
-  
+    
 <style lang="scss" scoped>
 * {
   // font-family: 'Courier New', Courier, monospace;
@@ -99,7 +99,7 @@
 
 }
 </style>
-  
+    
 <script>
 import { reactive } from 'vue';
 
@@ -110,7 +110,6 @@ export default {
       username: '',
       password: ''
     })
-
 
     const register = () => {
 

@@ -14,7 +14,7 @@
     </div>
   </header>
 </template>
-  
+    
 <style lang="scss" scoped>
 * {
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -83,7 +83,7 @@
   }
 }
 </style>
-  
+    
 <script>
 import { ref } from 'vue'
 import TheSidebar from './TheSidebar.vue'

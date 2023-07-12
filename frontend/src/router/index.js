@@ -1,17 +1,16 @@
-import { createRouter, createWebHistory } from "vue-router"
-import Home from '../views/Home.vue'
+import { createRouter, createWebHistory } from 'vue-router'
+
 
 const routes = [
     { 
         path: '/',
         name: 'Home',
-        // redirect: '/login', 
-        // component: () => import('../components/DefaultLayout.vue')
-        component: () => import('../components/TheHeader.vue')
-        // component: () => import('../components/TheBoardGame.vue')
-
-    }
-    
+        component: () => import('../views/TheHome.vue')
+    },
+    { 
+        path: '/footer',
+        component: () => import('../components/TheFooter.vue')
+    },
 ]
 
 const router = createRouter({

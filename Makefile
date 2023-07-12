@@ -3,20 +3,20 @@
 destroy:
 	docker compose down --rmi all --volumes --remove-orphans
 
-rebuild:
-	docker compose build --no-cache
-
 build:
-	docker compose build
+	docker compose build ${cmd}
 
 remove:
 	@make destroy
 	docker system prune -a
 
 up:
-	docker compose up
+	docker compose up ${cmd}
 
-cp-env:
+down:
+	docker compose down
+
+cp_env:
 	cp .env .env.example
 	cp .env.example backend/.envs/.backend
 
@@ -34,3 +34,6 @@ createsuperuser:
 
 flush:
 	docker compose run --rm backend python manage.py flush --no-input
+
+npm_install:
+	docker compose exec frontend npm install ${cmd}

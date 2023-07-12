@@ -15,7 +15,7 @@
     </div>
   </aside>
 </template>
-      
+        
 <style lang="scss" scoped>
 * {
   font-family: 'Courier New', Courier, monospace;
@@ -27,6 +27,7 @@
   &.is-expanded {
     width: 250px;
   }
+
   // display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -64,7 +65,7 @@
   }
 }
 </style>
-      
+        
 <script>
 export default {
   setup() {
