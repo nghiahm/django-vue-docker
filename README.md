@@ -1,26 +1,27 @@
-# Django-VueJS-PostgreSQL
+# Dockerizing Django and VueJS with Postgres, Gunicorn, and Nginx
 
-## psql command
-```bash
-https://www.postgresqltutorial.com/postgresql-administration/psql-commands/
-```
+
 # Usage
-## 1. Database connection
-```bash 
-# psql -h {db_host} -U {db_user} --dbname {db_name}
-psql -h postgres -U admin --dbname pg_db
-\l # list databases
-\dt # list tables
-```
-## 2. Create `venv`
-```bash
-python3 -m venv venv
-```
-## 3. Copy `.env` file
-```bash 
-cp .env.example backend/.env
-```
-## Run project
+## Commands
+1. Run project 
 ```bash
 make start
 ```
+2. Install backend packages
+```bash 
+make poetry_add cmd=${package_name}
+```
+3. Install frontend packages
+```bash 
+make npm_install cmd=${package_name}
+```
+4. Connect postgresql database
+```bash
+psql -h ${db_host} -U ${db_user} --dbname ${db_name}
+\l # list databases
+\dt # list tables
+```
+
+# Links
+https://www.postgresqltutorial.com/postgresql-administration/psql-commands/
+

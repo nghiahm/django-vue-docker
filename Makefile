@@ -1,39 +1,56 @@
 .SILENT: # hidden output command
 
+COMPOSE = docker compose -f docker-compose.yml
+
 destroy:
-	docker compose down --rmi all --volumes --remove-orphans
+	@$(COMPOSE) down --rmi all --volumes --remove-orphans
 
 build:
-	docker compose build ${cmd}
+	@$(COMPOSE) build ${cmd}
 
 remove:
 	@make destroy
 	docker system prune -a
 
 start:
-	docker compose up -d
+	@$(COMPOSE) up -d
 
 stop:
-	docker compose down
+	@$(COMPOSE) down
+
+logs:
+	@$(COMPOSE) logs -f $(cmd)
 
 cp_env:
 	cp .env .env.example
 	cp .env.example backend/.envs/.backend
 
 migrate:
-	docker compose run --rm backend python manage.py migrate
+	@$(COMPOSE) run --rm backend python manage.py migrate
 
-migrations:
-	docker compose run --rm backend python manage.py makemigrations
+makemigrations:
+	@$(COMPOSE) run --rm backend python manage.py makemigrations ${cmd}
 
 collectstatic:
-	docker compose run --rm backend python manage.py collectstatic
+	@$(COMPOSE) run --rm backend python manage.py collectstatic
 
 createsuperuser:
-	docker compose run --rm backend python manage.py createsuperuser
+	@$(COMPOSE) run --rm backend python manage.py createsuperuser
 
 flush:
-	docker compose run --rm backend python manage.py flush --no-input
+	@$(COMPOSE) run --rm backend python manage.py flush --no-input
+
+poetry_add:
+	@$(COMPOSE) exec backend poetry add ${cmd}
+
+startapp:
+	@$(COMPOSE) exec backend python manage.py startapp ${cmd}
 
 npm_install:
-	docker compose exec frontend npm install ${cmd}
+	@$(COMPOSE) exec frontend npm install ${cmd}
+
+run_backend:
+	@$(COMPOSE) run --rm backend ${cmd}
+
+run_frontend:
+	@$(COMPOSE) run --rm frontend ${cmd}
