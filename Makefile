@@ -10,10 +10,10 @@ remove:
 	@make destroy
 	docker system prune -a
 
-up:
-	docker compose up ${cmd}
+start:
+	docker compose up -d
 
-down:
+stop:
 	docker compose down
 
 cp_env:
