@@ -20,7 +20,7 @@ python3 -m venv venv
 ```bash 
 cp .env.example backend/.env
 ```
-## Run
+## Run project
 ```bash
-make up
+make start
 ```
